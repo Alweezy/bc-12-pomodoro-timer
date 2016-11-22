@@ -43,7 +43,7 @@ class PomoDoroTimer(object):
 			self.default_time = cycle_stop
 			return cycle_stop
 
-	def config_short_break(self, shrt_break_duration=15):
+	def config_short_break(self, shrt_break_duration=5):
 		"""Function sets a short break in between a pomodoro task,
 		if no time value is given, then the default time value is used.
 
@@ -51,18 +51,17 @@ class PomoDoroTimer(object):
 		return shrt_break_duration
 
 
-	def config_long_break(self, lng_break_duration):
+	def config_long_break(self, lng_break_duration = 15):
 		"""Function sets the duration for the long break after a pomodoro
 		task, if no time value is given, then default duration is used.
 		"""
-		pass
+		return lng_break_duration
 
 	def config_sound(self, toggle=False):
 		"""Function turns sound notification on/off
 
 		"""
-		self.toggle = True
-		return self.toggle
+		return toggle
 
 	def stop(self):
 		"""Function marks the end of the current running pomodoro task;
