@@ -20,11 +20,11 @@ class PomoDoroTimer(object):
 		    time.sleep(1)
 		if remaining is 1 and self.config_sound(True):
 			sys.stdout.write("\rpomodoro cycle is over.......\n")
-			import pygame
-			pygame.init()
-			pygame.mixer.music.load("bell.wav")
-			pygame.mixer.music.play()
-			pygame.event.wait()
+			# import pygame
+			# pygame.init()
+			# pygame.mixer.music.load("bell.wav")
+			# pygame.mixer.music.play()
+			# pygame.event.wait()
 		else:
 			sys.stdout.write("\rpomodoro cycle is over but alarm is off\n")
 
@@ -43,12 +43,13 @@ class PomoDoroTimer(object):
 			self.default_time = cycle_stop
 			return cycle_stop
 
-	def config_short_break(self, shrt_break_duration):
+	def config_short_break(self, shrt_break_duration=15):
 		"""Function sets a short break in between a pomodoro task,
 		if no time value is given, then the default time value is used.
 
 		"""
-		pass
+		return shrt_break_duration
+
 
 	def config_long_break(self, lng_break_duration):
 		"""Function sets the duration for the long break after a pomodoro
@@ -81,4 +82,4 @@ class PomoDoroTimer(object):
 
 
 my_pro = PomoDoroTimer()
-print my_pro.start_timer(1)
+print my_pro.config_short_break()
