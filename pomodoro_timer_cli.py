@@ -2,21 +2,29 @@ from pomodoro_timer import PomoDoroTimer
 
 def cli_main():
 	commands = PomoDoroTimer()
-    #while True:
-	print('\n')
-	print('            WELCOME TO POMODORO TIMER')
-	print('            -------------------------')
-	print('            what do you want to do?:\n')
-	print('        1. Start Pomodoro\n        2. Configure Pomodoro Cycle Length\n'
-          '        3. Configure Intercycles Break Length\n        4. Configure Long Break\n'
-          '        5. Configure Cycle Alarm ON/OFF\n        6. STOP\n'
-          '        7. list all tasks\n        8. Exit\n')
+	while True:
+		print('\n')
+		print('            WELCOME TO POMODORO TIMER')
+		print('            -------------------------')
+		print('            what do you want to do?:\n')
+		print('        1. Start Pomodoro\n        2. Configure Pomodoro Cycle Length\n'
+	          '        3. Configure Intercycles Break Length\n        4. Configure Long Break\n'
+	          '        5. Configure Cycle Alarm ON/OFF\n        6. STOP\n'
+	          '        7. list all tasks\n        8. Exit\n')
 
-	selection = raw_input("Enter an option here: ")
-	if selection == "1":
-		commands.start_timer()
-	elif selection == "2":
-		pass
+		selection = raw_input("Enter an option here: ")
+		if selection == "1":
+			commands.start_timer()
+		elif selection == "2":
+			cycle_duration = raw_input("Enter the Cycle Duration or press ENTER to use default(25):")
+			if cycle_duration == '':
+				cycle_duration = 25
+				command.start_timer(int(cycle_duration))
+			elif cycle_duration:
+				try:
+					commands.start_timer(int(cycle_duration))
+				except ValueError:
+					print "Invalid format"
 
 
 
