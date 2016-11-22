@@ -1,7 +1,7 @@
 import datetime
 class PomoDoroTimer(object):
 	def __init__(self):
-		pass
+		self.cycle_start = datetime.datetime.now()
 
 	def start_timer(self, cycle_duration):
 		"""Function starts a promodoro timer and records the task title,
@@ -9,21 +9,25 @@ class PomoDoroTimer(object):
 		It also plays a sound bell at the end of a promodoro cycle.
 
 		"""
+		print self.cycle_start
 	 	end_of_cycle = self.config_time(cycle_duration)
-		#return end_of_cycle
+		if end_of_cycle:
+			alarm_ring = self.config_sound(True)
+		else:
+			alarm_ring = self.config_time(False)
 
 
-	def config_time(self,cycle_duration):
+	def config_time(self, cycle_duration):
 		"""Function sets the time duration for a particular promodoro,
 		if no time is given, then default time is used.
 
 		"""
-		cycle_start = datetime.datetime.now()
+		self.cycle_start
 		if cycle_duration:	
-			cycle_stop = cycle_start + datetime.timedelta(minutes = int(cycle_duration))
+			cycle_stop = self.cycle_start + datetime.timedelta(minutes = int(cycle_duration))
 			return cycle_stop
 		else:
-			cycle_stop = cycle_start + datetime.timedelta(minutes = 25)
+			cycle_stop = self.cycle_start + datetime.timedelta(minutes = 25)
 			self.default_time = cycle_stop
 			return cycle_stop
 
@@ -40,11 +44,19 @@ class PomoDoroTimer(object):
 		"""
 		pass
 
-	def config_sound(self, toggle):
+	def config_sound(self, toggle=False):
 		"""Function turns sound notification on/off
 
-		"""	
-		pass
+		"""
+		if toggle is True:
+			import pygame
+			pygame.init()
+			pygame.mixer.music.load("bell.wav")
+			pygame.mixer.music.play()
+			pygame.event.wait()
+		else:
+			print "Promodoro task still on"
+			return ''
 
 	def stop(self):
 		"""Function marks the end of the current running pomodoro task;
