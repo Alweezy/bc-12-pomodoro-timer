@@ -8,19 +8,24 @@ class PomoDoroTimer(object):
 		and start_time and date.
 		It also plays a sound bell at the end of a promodoro cycle.
 
-
 		"""
-		cycle_start = datetime.datetime.now()
-		cycle_stop = config_time()
-		return cycle_stop
+	 	end_of_cycle = self.config_time(cycle_duration)
+		#return end_of_cycle
 
 
-	def config_time(self, task_time_duration):
+	def config_time(self,cycle_duration):
 		"""Function sets the time duration for a particular promodoro,
 		if no time is given, then default time is used.
 
 		"""
-		pass
+		cycle_start = datetime.datetime.now()
+		if cycle_duration:	
+			cycle_stop = cycle_start + datetime.timedelta(minutes = int(cycle_duration))
+			return cycle_stop
+		else:
+			cycle_stop = cycle_start + datetime.timedelta(minutes = 25)
+			self.default_time = cycle_stop
+			return cycle_stop
 
 	def config_short_break(self, shrt_break_duration):
 		"""Function sets a short break in between a promodoro task,
@@ -59,4 +64,4 @@ class PomoDoroTimer(object):
 
 
 my_pro = PomoDoroTimer()
-print my_pro.start("")
+print my_pro.start_timer(2)
