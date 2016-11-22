@@ -1,14 +1,19 @@
+import datetime
 class PomoDoroTimer(object):
 	def __init__(self):
 		pass
 
-	def start(self, task_title):
+	def start_timer(self, cycle_duration):
 		"""Function starts a promodoro timer and records the task title,
 		and start_time and date.
 		It also plays a sound bell at the end of a promodoro cycle.
 
+
 		"""
-		pass
+		cycle_start = datetime.datetime.now()
+		cycle_stop = config_time()
+		return cycle_stop
+
 
 	def config_time(self, task_time_duration):
 		"""Function sets the time duration for a particular promodoro,
@@ -49,3 +54,9 @@ class PomoDoroTimer(object):
 
 		"""
 		pass
+
+
+
+
+my_pro = PomoDoroTimer()
+print my_pro.start("")
