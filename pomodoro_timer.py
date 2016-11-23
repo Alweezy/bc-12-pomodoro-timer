@@ -62,7 +62,7 @@ class PomoDoroTimer(object):
 		print "********END OF SHORT BREAK, GOING BACK TO CYCLE*********\n"
 
 
-	def config_long_break(self, lng_break_duration=15):
+	def config_long_break(self, lng_break_duration):
 		"""Function sets the duration for the long break after a pomodoro
 		task, if no time value is given, then default duration is used.
 		"""
