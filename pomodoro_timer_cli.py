@@ -19,16 +19,29 @@ def cli_main():
 			cycle_duration = raw_input("Enter the Cycle Duration or press ENTER to use default(25):")
 			if cycle_duration == '':
 				cycle_duration = 25
-				command.start_timer(int(cycle_duration))
+				commands.start_timer(int(cycle_duration))
 			elif cycle_duration:
 				try:
 					commands.start_timer(int(cycle_duration))
 				except ValueError:
-					print "Invalid format"
+					print "Invalid format."
+		elif selection == "3":
+			break_len = raw_input("Enter the desired break length or press ENTER to use default(5): ")
+			shrt_break_duration = break_len
+			if break_len == "":
+				shrt_break_duration = 5
+				commands.config_short_break(int(shrt_break_duration))
+			elif shrt_break_duration:
+				try:
+					commands.config_short_break(int(shrt_break_duration))
+				except ValueError:
+					print "Invalid format."
 
 
 
-        
+
+
+
 if __name__ == '__main__':cli_main()
 
 
