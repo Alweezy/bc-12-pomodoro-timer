@@ -2,6 +2,7 @@ import datetime
 import pygame
 import time
 import sys
+import execution_modules
 class PomoDoroTimer(object):
 	def __init__(self):
 		self.cycle_length = 25
@@ -15,7 +16,15 @@ class PomoDoroTimer(object):
 		It also plays a sound bell at the end of a pomodoro cycle.
 
 		"""
-		pass:
+		for cycles in range(4):
+			execution_modules.cycle(self.cycle_length)
+			print "*************************************"
+			if cycles < 4:
+				execution_modules.short_break(self.short_break_length)
+				print "************************************"
+		execution_modules.long_break(selfh	.long_break_length)
+		print "End of task !"
+
 
 	def config_time(self, cycle_length):
 		"""Function sets the time duration for a particular promodoro cycle,
