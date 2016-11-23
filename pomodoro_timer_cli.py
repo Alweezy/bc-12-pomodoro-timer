@@ -31,11 +31,24 @@ def cli_main():
 			if break_len == "":
 				shrt_break_duration = 5
 				commands.config_short_break(int(shrt_break_duration))
-			elif shrt_break_duration:
+			elif break_len:
 				try:
 					commands.config_short_break(int(shrt_break_duration))
 				except ValueError:
 					print "Invalid format."
+		elif selection == "4":
+			break_len =raw_input("Enter long break length or press ENTER to use default: ")
+			lng_break_duration = break_len
+			if break_len == "":
+				lng_break_duration = 15
+				commands.config_long_break(int(lng_break_duration))
+			elif break_len:
+				try:
+					commands.config_long_break(int(lng_break_duration))
+				except ValueError:
+					print "Invalid format"
+
+
 
 
 
