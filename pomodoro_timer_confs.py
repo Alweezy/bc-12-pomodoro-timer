@@ -19,9 +19,9 @@ class PomoDoroTimer(object):
 				task_time = datetime.datetime.now().time()
 				task_date = datetime.date.today()
 				print task_time
+				return ""
 			except ValueError:
 				print "every task should have a name"
-
 				return ""
 	def config_time(self, cycle_duration):
 		"""Function sets the time duration for a particular promodoro cycle,
@@ -91,8 +91,10 @@ class PomoDoroTimer(object):
 			toggle = False			
 			return toggle
 		if settings:
-			toggle = True
-			return toggle
+			pygame.init()
+			pygame.mixer.music.load("bell_true.mp3")
+			pygame.mixer.music.play()
+			time.sleep(4)
 
 my_pro = PomoDoroTimer()
-print my_pro.start_timer(1)
+print my_pro.config_sound(1)
