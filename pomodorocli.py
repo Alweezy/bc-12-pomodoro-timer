@@ -67,6 +67,8 @@ class MyInteractive (cmd.Cmd):
     @docopt_cmd
     def do_start(self, arg):
         """Usage: start <task_title>"""
+        title = arg['<task_title>']
+        pomodoro.start(title)
 
     @docopt_cmd
     def do_configtime(self, arg):
