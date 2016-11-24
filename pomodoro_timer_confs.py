@@ -18,11 +18,13 @@ class PomoDoroTimer(object):
 		"""
 		for cycles in range(4):
 			execution_modules.cycle(self.cycle_length)
-			print "*************************************"
 			if cycles < 4:
 				execution_modules.short_break(self.short_break_length)
-				print "************************************"
-		execution_modules.long_break(selfh	.long_break_length)
+				print ("\n")
+				print "************************************ \n"
+				print "Going back to task, cycle" + str(cycles + 1)
+
+		execution_modules.long_break(self.long_break_length)
 		print "End of task !"
 
 
