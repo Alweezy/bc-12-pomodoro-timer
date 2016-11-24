@@ -1,5 +1,6 @@
 import time
 import sys
+import pygame
 def cycle(length):
 	for rem_time in range(length, 0, -1):
 		sys.stdout.write("\r")
@@ -25,4 +26,4 @@ def bell(play_sound):
 	pygame.init()
 	pygame.mixer.music.load("bell_true.mp3")
 	pygame.mixer.music.play()
-	time.sleep(4)
+	time.sleep(0)
