@@ -61,7 +61,7 @@ def docopt_cmd(func):
 class MyInteractive (cmd.Cmd):
     intro = 'Welcome to my interactive program!' \
         + ' (type help for a list of commands.)'
-    prompt = 'pomooro_timer:> '
+    prompt = 'pomodoro_timer: > '
 
     file = None
 
@@ -99,7 +99,7 @@ class MyInteractive (cmd.Cmd):
 
     @docopt_cmd
     def do_listall(self, arg):
-        """Usage: list """
+        """Usage: listall """
         pomodoro.list_all()
 
     def do_quit(self, arg):
