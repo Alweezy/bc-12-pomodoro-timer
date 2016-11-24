@@ -6,6 +6,7 @@ import execution_modules
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from pomodoro_timer_db import PomodoroList, Base
+from prettytable import PrettyTable
 
 engine = create_engine('sqlite:///all_tasks.db')
 
@@ -28,18 +29,20 @@ class PomoDoroTimer(object):
 		It also plays a sound bell at the end of a pomodoro cycle.
 
 		"""
-		for cycles in range(4):
+		self.task_name = task_name
+		session.add(PomodoroList(self.task_name, self.cycles))
+		session.commit()
+		for cycles in range(1,5):
 			execution_modules.cycle(self.cycle_length)
 			if cycles < 4:
 				execution_modules.short_break(self.short_break_length)
 				print ("\n")
 				print "************************************ \n"
-				print "Going back to task, cycle" + str(cycles + 1)
+				print "Going back to task, cycle" + " " + str(cycles + 1)
 
 		execution_modules.long_break(self.long_break_length)
 		print "End of task !"
-		return self.task_name
-
+		return ''
 
 	def config_time(self, cycle_length):
 		"""Function sets the time duration for a particular promodoro cycle,
@@ -88,10 +91,17 @@ class PomoDoroTimer(object):
 		else:
 			print 'Only bool variable, i.e True or False'
 		return
-	def list_all(self): 
-		"""Function creates a database of tasks handled per on a date
-		"""
 
-		tasks = PomodoroList(self.task_name, self.cycles)
-		session.add(tasks)
-		session.commit()
+	def list_all(self):
+		"""Function lists all tasks in the database
+		"""
+		list_entries = session.query(PomodoroList).all()
+		data_table = PrettyTable(['Task_id', 'Task_name', 'No._of_cycles', 'Task_Date'])
+		for row in list_entries:
+			get_id = row.id
+			get_cycles = row.cycles
+			get_date = row.task_date
+			get_task_name = row.task_name
+			data_table.add_row((get_id, get_task_name, get_cycles, get_date))
+		print data_table
+
