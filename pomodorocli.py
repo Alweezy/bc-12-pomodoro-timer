@@ -8,6 +8,7 @@ Usage:
     my_program configlongbreak <duration_in_minutes>
     my_program configshortbreak <duration_in_minutes>
     my_program configsound <off/on>
+    my_program listall <>
     my_program list
 
     my_program (-i | --interactive)
@@ -97,9 +98,9 @@ class MyInteractive (cmd.Cmd):
 
 
     @docopt_cmd
-    def do_list(self, arg):
+    def do_listall(self, arg):
         """Usage: list """
-
+        pomodoro.list_all()
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
