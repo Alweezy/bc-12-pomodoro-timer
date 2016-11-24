@@ -9,7 +9,6 @@ Usage:
     my_program configshortbreak <duration_in_minutes>
     my_program configsound <off/on>
     my_program listall <>
-    my_program list
 
     my_program (-i | --interactive)
     my_program (-h | --help | --version)
@@ -23,6 +22,7 @@ import sys
 import cmd
 from docopt import docopt, DocoptExit
 from pomodoro_timer_confs import PomoDoroTimer
+from colorama import init
 
 pomodoro = PomoDoroTimer()
 
@@ -59,9 +59,15 @@ def docopt_cmd(func):
 
 
 class MyInteractive (cmd.Cmd):
-    intro = 'Welcome to my interactive program!' \
-        + ' (type help for a list of commands.)'
-    prompt = 'pomodoro_timer: > '
+    init(strip=not sys.stdout.isatty()) # strip colors if stdout is redirected
+    from termcolor import cprint 
+    from pyfiglet import figlet_format
+    intro = cprint(figlet_format('welcome to pomodoro', font='big'),
+           'yellow', 'on_blue', attrs=['bold'])
+    print "(type help for a list of commands.)"
+    # intro = 'Welcome to my interactive program!' \
+        # + ' (type help for a list of commands.)'
+    prompt = 'pomodoro_timer:=> '
 
     file = None
 
@@ -105,7 +111,7 @@ class MyInteractive (cmd.Cmd):
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
 
-        print('Good Bye!')
+        print('*********************BYE*********************!')
         exit()
 
 #opt = docopt(__doc__, sys.argv[1:])
