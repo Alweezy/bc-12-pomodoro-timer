@@ -3,12 +3,24 @@ import pygame
 import time
 import sys
 import execution_modules
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from pomodoro_timer_db import PomodoroList, Base
+
+engine = create_engine('sqlite:///all_tasks.db')
+
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
+
 class PomoDoroTimer(object):
 	def __init__(self):
 		self.cycle_length = 25
 		self.short_break_length = 5
 		self.long_break_length = 15
 		self.sound = True
+		self.cycles = 4
+		self.task_name = ""
 
 	def start(self, task_name):
 		"""Function starts a pomodoro timer and records the task title,
@@ -26,6 +38,7 @@ class PomoDoroTimer(object):
 
 		execution_modules.long_break(self.long_break_length)
 		print "End of task !"
+		return self.task_name
 
 
 	def config_time(self, cycle_length):
@@ -74,4 +87,11 @@ class PomoDoroTimer(object):
 			self.sound = False
 		else:
 			print 'Only bool variable, i.e True or False'
-		return 
+		return
+	def list_all(self): 
+		"""Function creates a database of tasks handled per on a date
+		"""
+
+		tasks = PomodoroList(self.task_name, self.cycles)
+		session.add(tasks)
+		session.commit()
