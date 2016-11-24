@@ -32,11 +32,12 @@ class PomoDoroTimer(object):
 		self.task_name = task_name
 		session.add(PomodoroList(self.task_name, self.cycles))
 		session.commit()
-		for cycles in range(1,5):
+		for cycles in range(1, 5):
 			execution_modules.cycle(self.cycle_length)
 			if cycles < 4:
 				execution_modules.short_break(self.short_break_length)
 				print ("\n")
+				execution_modules.bell(self.sound)
 				print "************************************ \n"
 				print "Going back to task, cycle" + " " + str(cycles + 1)
 
