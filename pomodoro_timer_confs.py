@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from pomodoro_timer_db import PomodoroList, Base
 from prettytable import PrettyTable
+from termcolor import colored
 
 engine = create_engine('sqlite:///all_tasks.db')
 
@@ -35,14 +36,17 @@ class PomoDoroTimer(object):
 		for cycles in range(1, 5):
 			execution_modules.cycle(self.cycle_length)
 			if cycles < 4:
-				execution_modules.short_break(self.short_break_length)
-				print ("\n")
 				execution_modules.bell(self.sound)
-				print "************************************ \n"
+				time.sleep(2)
+				execution_modules.short_break(self.short_break_length)
 				print "Going back to task, cycle" + " " + str(cycles + 1)
-
+				time.sleep(1)
+		execution_modules.bell(self.sound)
+		print colored("\nGoing for a long break.........!", "white")
+		time.sleep(1)
 		execution_modules.long_break(self.long_break_length)
-		print "End of task !"
+		time.sleep(1)
+		print colored("\n*************End of task !*****************", "white")
 		return ''
 
 	def config_time(self, cycle_length):
@@ -104,5 +108,5 @@ class PomoDoroTimer(object):
 			get_date = row.task_date
 			get_task_name = row.task_name
 			data_table.add_row((get_id, get_task_name, get_cycles, get_date))
-		print data_table
+		print colored(data_table, "white")
 
