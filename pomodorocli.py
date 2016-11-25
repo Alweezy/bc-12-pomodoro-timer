@@ -7,7 +7,7 @@ Usage:
     my_program configtime <duration_in_minutes>
     my_program configlongbreak <duration_in_minutes>
     my_program configshortbreak <duration_in_minutes>
-    my_program configsound <off/on>
+    my_program configsound <true/false>
     my_program listall <>
 
     my_program (-i | --interactive)
@@ -72,34 +72,34 @@ class MyInteractive (cmd.Cmd):
     file = None
 
     @docopt_cmd
-    def do_start(self, arg):
+    def do_start_task(self, arg):
         """Usage: start <task_title>"""
         title = arg['<task_title>']
         pomodoro.start(title)
 
     @docopt_cmd
-    def do_configtime(self, arg):
+    def do_config_time(self, arg):
         """Usage: configtime <duration_in_minutes>"""
         duration = arg['<duration_in_minutes>']
         pomodoro.config_time(duration)
 
     @docopt_cmd
-    def do_configshortbreak(self, arg):
+    def do_config_short_break(self, arg):
         """Usage: configshortbreak <duration_in_minutes>"""
         duration = arg['<duration_in_minutes>']
         pomodoro.config_short_break(duration)
 
     @docopt_cmd
-    def do_configlongbreak(self, arg):
+    def do_config_long_break(self, arg):
         """Usage: configlongbreak <duration_in_minutes> """
         duration = arg['<duration_in_minutes>']
         pomodoro.config_long_break(duration)
 
 
     @docopt_cmd
-    def do_configsound(self, arg):
-        """Usage: configsound <off/on> """
-        sound = arg['<off/on>']
+    def do_config_sound(self, arg):
+        """Usage: configsound <true/false> """
+        sound = arg['<true/false']
         pomodoro.config_sound(sound)
 
 
